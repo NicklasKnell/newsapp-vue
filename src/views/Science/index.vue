@@ -1,3 +1,32 @@
 <template>
-	<div></div>
+	<Page :articles="articles"></Page>
 </template>
+
+<script>
+import Page from "../../components/Page";
+
+import {
+	fetchArticles,
+	SCIENCE_REQUEST
+} from "../../shared/utils/articleRequests";
+
+export default {
+	components: {
+		Page
+	},
+	data: () => {
+		return {
+			articles: []
+		};
+	},
+	mounted: function() {
+		fetchArticles(SCIENCE_REQUEST)
+			.then(data => {
+				this.articles = data;
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
+};
+</script>
