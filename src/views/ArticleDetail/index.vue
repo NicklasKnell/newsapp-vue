@@ -1,25 +1,47 @@
 <template>
-	<div class="article" :class="theme">
-		<h1></h1>
-		<p></p>
-		<div class="metadata"></div>
-	</div>
+  <div class="wrapper">
+    <div class="article" :class="theme" v-if="article">
+      <h1>{{article.title}}</h1>
+      <p>{{article.content}}</p>
+      <ArticleMetadata :author="article.author" :releaseDate="article.releaseDate"/>
+    </div>
+  </div>
 </template>
 
 <script>
-import { ARTICLE_SHAPE } from "../../shared/utils/article.js";
+import { fetchArticle } from "../../shared/utils/articleRequests.js";
+import ArticleMetadata from "../../components/ArticleMetadata";
 
 export default {
-	computed: {
-		theme() {
-			return this.$store.state.theme;
-		},
-		article() {
-			fetchArticle();
-		}
-	}
+  data: () => {
+    return {
+      article: null
+    };
+  },
+  components: {
+    ArticleMetadata
+  },
+  computed: {
+    theme() {
+      return this.$store.state.theme;
+    }
+  },
+  mounted() {
+    fetchArticle(this.$route.params.id)
+      .then(data => {
+        this.article = data;
+      })
+      .catch(error => console.log(error));
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../shared/styles/global";
+@import "../../shared/styles/article";
+.wrapper {
+  padding: 50px;
+  margin: auto;
+  width: 70%;
+}
 </style>

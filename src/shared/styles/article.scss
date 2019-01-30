@@ -1,0 +1,20 @@
+.article {
+    background-color: white;
+    color: black;
+    border: solid 2px white;
+    padding: 20px 30px;
+    font-weight: 300;
+    font-size: 25px;
+  
+    &.dark {
+      background-color: $DARK_ARTICLE_BG;
+      color: $DARK_ARTICLE_COLOR;
+      border-color: $DARK_ARTICLE_BORDER;
+    }
+  
+    &.light {
+      background-color: $LIGHT_ARTICLE_BG;
+      color: $LIGHT_ARTICLE_COLOR;
+      border-color: $LIGHT_ARTICLE_BORDER;
+    }
+  }
