@@ -19,7 +19,7 @@ export default {
 			articles: []
 		};
 	},
-	mounted: function() {
+	mounted() {
 		fetchArticles(HOME_REQUEST)
 			.then(data => {
 				this.articles = data;

@@ -19,8 +19,7 @@ export default {
 			articles: []
 		};
 	},
-	mounted: function() {
-		console.log("Fetched", SPORTS_REQUEST);
+	mounted() {
 		fetchArticles(SPORTS_REQUEST)
 			.then(data => {
 				this.articles = data;
